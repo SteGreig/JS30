@@ -59,6 +59,35 @@
 
 <script>
 
+function playSound(e) {
+  const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+  const key = document.querySelector(`.key[data-key="${e.keyCode}"]`);
+
+  // if there is no audio element with a data-key value that matches the key pressed, stop the function
+  if(!audio) return;
+
+  key.classList.add('playing');
+
+  // Rewinds sound clip to the start, otherwise it won't play the sound in quick succession
+  audio.currentTime = 0;
+
+  // Play the sound
+  audio.play();
+}
+
+function removeTransition(e) {
+  // Only run this function when the transform has finished transitioning
+  if(e.propertyName !== "transform") return;
+  // Remove playing class from .key
+  this.classList.remove('playing');
+}
+
+const keys = document.querySelectorAll('.key');
+keys.forEach(key => key.addEventListener('transitionend', removeTransition));
+
+// Listen for a click within window (this could be an input etc.)
+window.addEventListener('keydown', playSound);
+
 </script>
 
 

@@ -7,6 +7,34 @@
 </head>
 <body>
 <script>
+
+/*
+const pressed = [];
+const secretCode = 'wesbos';
+
+window.addEventListener('keyup', (e) => {
+  console.log(e.key);
+  pressed.push(e.key);
+  pressed.splice(-secretCode.length - 1, pressed.length - secretCode.length);
+  if (pressed.join('').includes(secretCode)) {
+    console.log('DING DING!');
+  }
+  console.log(pressed);
+});
+*/
+
+const pressed = [];
+const secretCode = ['ArrowLeft','ArrowLeft','ArrowRight','ArrowDown'];
+
+window.addEventListener('keyup', (e) => {
+	pressed.push(e.key);
+	pressed.splice(-secretCode.length -1, pressed.length - secretCode.length);
+	console.log(pressed.join(''));
+	if(pressed.join('').includes(secretCode.join(''))) {
+		console.log('DING DING!!');
+	}
+});
+
 </script>
 </body>
 </html>

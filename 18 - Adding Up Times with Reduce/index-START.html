@@ -177,11 +177,44 @@
     <li data-time="1:56">
       Video 57
     </li>
-    <li data-time="4:04">
+    <li data-time="4:10">
       Video 58
     </li>
   </ul>
 <script>
+
+const timeNodes = document.querySelectorAll('.videos [data-time]');
+
+times = Array.from(timeNodes);
+
+const seconds = times
+  .map(time => time.dataset.time)
+  .map(timeCode => {
+    //return timeCode.split(':');
+    const [mins,secs] = timeCode.split(':');
+    return (parseFloat(mins)*60)+parseFloat(secs);
+});
+
+// 17944
+const totalSeconds = seconds.reduce((total, secs) => total + secs);
+
+const fullHours = Math.floor((totalSeconds / 60) / 60); // Round DOWN to nearest hour (to show what FULL hours we have)
+
+// 4 full hours. Seconds left after this = 3544
+const secondsLeft = totalSeconds % 3600; // Get seconds left over after they've been divided into full hours
+
+// 3544 / 60 = 59.0666667
+// 59 full minutes * 60 = 3540
+// Seconds left over after this = 4
+const mins = Math.floor(secondsLeft / 60); // Divide the seconds left over by 60 to get the no. of minutes
+
+const secs = secondsLeft % 60; // Get seconds left over after they've been divided into full minutes
+
+console.log(totalSeconds);
+console.log(secondsLeft);
+
+console.log(`${fullHours} hours, ${mins} minutes and ${secs} seconds`);
+
 </script>
 </body>
 </html>

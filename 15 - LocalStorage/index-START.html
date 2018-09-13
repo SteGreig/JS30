@@ -56,7 +56,7 @@ function unCheckAll() {
 function deleteAll() {
   items.length = 0;
   populateList(items, itemsList);
-  localStorage.setItem('items', JSON.stringify(items));
+  localStorage.clear();
 }
 
 checkAllBtn.addEventListener('click', checkAll);

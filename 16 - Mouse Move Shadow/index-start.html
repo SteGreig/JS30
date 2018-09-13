@@ -35,6 +35,41 @@
   </style>
 
 <script>
+
+const hero = document.querySelector('.hero');
+const h1 = document.querySelector('h1');
+const maxShadow = 100;
+
+function moveShadow(e) {
+  //const width = hero.offsetWidth;
+  //const height = hero.offsetHeight;
+
+  //let x = e.offsetX;
+  //let y = e.offsetY;
+
+  // Width & Height of hero
+  const { offsetWidth: width, offsetHeight: height } = hero;
+
+  // Position of cursor
+  let { offsetX: x, offsetY: y } = e;
+
+  if(this !== e.target) {
+    x = x + e.target.offsetLeft;
+    y = y + e.target.offsetTop;
+  }
+
+  const xShadow = Math.round((x / width * maxShadow) - maxShadow/2);
+  const YShadow = Math.round((y / height * maxShadow) - maxShadow/2);
+
+  h1.style.textShadow = `
+    ${xShadow}px ${YShadow}px 0 red,
+    ${xShadow*-1}px ${YShadow*-1}px 0 blue
+  `
+  ;
+}
+
+hero.addEventListener('mousemove', moveShadow);
+
 </script>
 </body>
 </html>
